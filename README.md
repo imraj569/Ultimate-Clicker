@@ -76,5 +76,3 @@ For questions or feedback, feel free to reach out:
 - [GitHub Profile](https://github.com/imraj569/)
 
 ---
-
-Feel free to adjust any sections or add more details as needed!
