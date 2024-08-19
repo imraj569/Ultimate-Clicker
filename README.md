@@ -1,77 +1,60 @@
+
 ---
 
-# Ultimate-Clicker 🎯
+# Ultimate Clicker 🎯
 
-Ultimate-Clicker is a powerful Python-based tool designed to automate mouse and keyboard actions. This project includes three main scripts to help you record, execute, and manage automated clicks and keystrokes. Whether you're looking to streamline repetitive tasks or create custom automation scripts, Ultimate-Clicker has you covered!
+Welcome to the Ultimate Clicker! This Python application lets you record mouse and keyboard events, set custom sleep times, and automate click sequences with ease.
 
-## 📁 Scripts
+## Features 🌟
 
-1. **[record_clicks.pyw](record_clicks.pyw)** 🖱️
-   - **Purpose:** Records mouse clicks and keyboard events, and saves them to a file.
-   - **Features:**
-     - Record mouse clicks and keyboard events with configurable sleep times.
-     - Save recorded data to a file for later use.
-     - Reset and configure settings using an intuitive GUI.
+- **Mouse Recorder**: Record mouse clicks with customizable sleep times.
+- **Keyboard Recorder**: Record keyboard events with customizable sleep times.
+- **Auto Clicker**: Start an auto-clicker script to automate mouse clicks.
+- **Save Data**: Save recorded mouse and keyboard actions to a file.
+- **Open Records**: Open recorded data in Notepad for review.
+- **Reset**: Clear recorded data and start fresh.
 
-2. **[auto_clicker.pyw](auto_clicker.pyw)** ⏯️
-   - **Purpose:** Executes the recorded clicks and keystrokes from a file.
-   - **Features:**
-     - Play, pause, and reset execution.
-     - Set the number of repetitions for the click and keystroke actions.
-     - View real-time status updates and remaining repetitions.
+## Installation 🛠️
 
-3. **[manual_clicks.pyw](manual_clicks.pyw)** 📝
-   - **Purpose:** Provides a basic template for manual clicks and keyboard actions.
-   - **Features:**
-     - Play and reset script actions using a simple GUI.
-     - Set hotkeys for quick script control.
+1. Ensure you have Python installed (Python 3.6 or higher recommended).
+2. Install the required packages using pip:
+    ```bash
+    pip install pyautogui keyboard
+    ```
+3. Download or clone the repository:
+    ```bash
+    git clone https://github.com/imraj569/Ultimate-Clicker.git
+    ```
+4. Navigate to the project directory:
+    ```bash
+    cd Ultimate-Clicker
+    ```
 
-## 🚀 Getting Started
+## Usage 🚀
 
-### Installation
+1. **Run the Application**:
+    ```bash
+    pythonw ultimate_clicks.pyw
+    ```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/imraj569/Ultimate-Clicker.git
-   ```
+2. **Mouse & Keyboard Recording**:
+   - **Help**: View instructions for using the application.
+   - **Set Mouse Sleep Time**: Customize the sleep time between mouse clicks.
+   - **Set Keyboard Sleep Time**: Customize the sleep time between keyboard presses.
+   - **Record Keyboard**: Start or stop recording keyboard events.
+   - **Save Recorded Data**: Save all recorded mouse and keyboard actions to `recorded_data.txt`.
+   - **Reset**: Clear all recorded data and reset counters.
+   - **Check Records**: Open `recorded_data.txt` in Notepad.
+   - **Start Auto Clicker**: Launch the auto clicker script.
 
-2. Install the required dependencies:
-   ```bash
-   pip install pyautogui keyboard tkinter
-   ```
+3. **Exit the Program**: Save all recorded data and close the application.
 
-### Usage
+## Contacts 📬
 
-1. **Recording Clicks:**
-   - Run `record_clicks.pyw` to open the recording interface.
-   - Configure settings, record clicks and keystrokes, and save them to a file.
+- **GitHub**: [imraj569](https://github.com/imraj569/)
 
-2. **Executing Clicks:**
-   - Run `auto_clicker.pyw` to start executing recorded actions.
-   - Use the GUI to play, pause, and reset the execution.
-
-3. **Manual Actions:**
-   - Run `manual_clicks.pyw` to test basic script actions.
-   - Use hotkeys or the GUI to control the script.
-
-## 💡 Features
-
-- **Customizable Sleep Times:** Set and adjust sleep times between actions.
-- **Real-Time Status Updates:** Monitor the status of your automation scripts.
-- **Easy Configuration:** Simple GUI for recording, executing, and managing actions.
-
-## 🛠️ Contributing
-
-Contributions are welcome! Please fork the repository, make your changes, and submit a pull request. For detailed guidelines, check the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
-## 📄 License
+## License 📜
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-For questions or feedback, feel free to reach out:
-
-- [GitHub Profile](https://github.com/imraj569/)
 
 ---

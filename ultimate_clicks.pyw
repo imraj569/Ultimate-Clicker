@@ -3,12 +3,13 @@ import keyboard
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 from random import uniform  # Changed to `uniform` for float range
+import subprocess,os
 
 class MouseRecorder:
     def __init__(self, root):
         self.root = root
         self.root.title("Mouse & Keyboard Recorder")
-        self.root.geometry("910x200")  # Adjusted to fit new button
+        self.root.geometry("910x250")  # Adjusted to fit new button
         self.root.attributes('-topmost', True)  # Keep window on top
 
         # Mouse position and click count labels
@@ -49,6 +50,14 @@ class MouseRecorder:
         # Record/Stop Keyboard button
         self.button_record_keyboard = tk.Button(self.button_frame, text="Record Keyboard", command=self.toggle_keyboard_recording)
         self.button_record_keyboard.grid(row=0, column=5, padx=5)
+
+        # New buttons
+        self.button_open_notepad = tk.Button(self.button_frame, text="Check Records", command=self.open_notepad)
+        self.button_open_notepad.grid(row=1, column=1, padx=0, pady=5)  # Adjust padx for gap
+
+        self.button_auto_clicker = tk.Button(self.button_frame, text="Start Auto Clicker", command=self.start_auto_clicker)
+        self.button_auto_clicker.grid(row=1, column=2, padx=5, pady=5)  # Adjust padx for gap
+
 
         self.total_clicks = 0
         self.click_positions = []
@@ -178,6 +187,27 @@ class MouseRecorder:
             if event.name in self.current_modifiers:
                 # Reset the modifier key state on release
                 self.current_modifiers[event.name] = False
+
+    def open_notepad(self):
+        try:
+            file_path = 'recorded_data.txt'
+            if os.path.exists(file_path):
+                os.startfile(file_path)  # Open file in default application (Notepad)
+            else:
+                messagebox.showerror("Error", "Recorded data file not found.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to open file: {e}")
+
+    def start_auto_clicker(self):
+        try:
+            script_path = 'Auto_clicks.pyw'
+            if os.path.exists(script_path):
+                subprocess.Popen(['pythonw', script_path])  # Start the auto clicker script
+            else:
+                messagebox.showerror("Error", "Auto Clicker script not found.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to start auto clicker: {e}")
+
 
     def exit_program(self):
         if self.recording_keyboard:
