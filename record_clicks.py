@@ -2,13 +2,13 @@ import pyautogui
 import keyboard
 import tkinter as tk
 from tkinter import simpledialog, messagebox
-from random import randint
+from random import uniform  # Changed to `uniform` for float range
 
 class MouseRecorder:
     def __init__(self, root):
         self.root = root
         self.root.title("Mouse & Keyboard Recorder")
-        self.root.geometry("750x200")  # Adjusted to fit new button
+        self.root.geometry("910x200")  # Adjusted to fit new button
         self.root.attributes('-topmost', True)  # Keep window on top
 
         # Mouse position and click count labels
@@ -31,26 +31,32 @@ class MouseRecorder:
         self.button_help.grid(row=0, column=0, padx=5)
 
         # Set Sleep Time button
-        self.button_set_sleep = tk.Button(self.button_frame, text="Set Sleep Time", command=self.set_sleep_time)
+        self.button_set_sleep = tk.Button(self.button_frame, text="Set Mouse Sleep Time", command=self.set_sleep_time)
         self.button_set_sleep.grid(row=0, column=1, padx=5)
+
+        # Set Keyboard Sleep Time button
+        self.button_set_keyboard_sleep = tk.Button(self.button_frame, text="Set Keyboard Sleep Time", command=self.set_keyboard_sleep_time)
+        self.button_set_keyboard_sleep.grid(row=0, column=2, padx=5)
 
         # Save button
         self.button_save = tk.Button(self.button_frame, text="Save Recorded Data", command=self.save_clicks)
-        self.button_save.grid(row=0, column=2, padx=5)
+        self.button_save.grid(row=0, column=3, padx=5)
 
         # Reset button
         self.button_reset = tk.Button(self.button_frame, text="Reset", command=self.reset)
-        self.button_reset.grid(row=0, column=3, padx=5)
+        self.button_reset.grid(row=0, column=4, padx=5)
 
         # Record/Stop Keyboard button
         self.button_record_keyboard = tk.Button(self.button_frame, text="Record Keyboard", command=self.toggle_keyboard_recording)
-        self.button_record_keyboard.grid(row=0, column=4, padx=5)
+        self.button_record_keyboard.grid(row=0, column=5, padx=5)
 
         self.total_clicks = 0
         self.click_positions = []
         self.keyboard_records = []
-        self.min_sleep = 1
-        self.max_sleep = 5
+        self.min_sleep = 1.0
+        self.max_sleep = 5.0
+        self.min_keyboard_sleep = 1.0  # Default keyboard sleep time
+        self.max_keyboard_sleep = 5.0  # Default keyboard sleep time
 
         self.recording_keyboard = False
         self.current_modifiers = {key: False for key in ['ctrl', 'shift', 'alt']}  # Initialize modifier keys state
@@ -75,24 +81,42 @@ class MouseRecorder:
             "2. Press 'Alt + S' to save the current mouse position.\n"
             "3. Press 'Esc' to exit and save the recorded data.\n"
             "4. Min 1 sec and Max 5 sec is the default wait time\n"
-            "5. Click 'Set Sleep Time' to specify the range of sleep times between clicks.\n"
-            "6. Click 'Record Keyboard' to start or stop recording keyboard events."
+            "5. Click 'Set Mouse Sleep Time' to specify the range of sleep times between mouse clicks.\n"
+            "6. Click 'Set Keyboard Sleep Time' to specify the range of sleep times between keyboard presses.\n"
+            "7. Click 'Record Keyboard' to start or stop recording keyboard events."
         )
         messagebox.showinfo("Help", instructions)
 
     def set_sleep_time(self):
         try:
-            min_sleep = simpledialog.askinteger("Set Sleep Time", "Enter minimum sleep time (seconds):", initialvalue=self.min_sleep)
-            max_sleep = simpledialog.askinteger("Set Sleep Time", "Enter maximum sleep time (seconds):", initialvalue=self.max_sleep)
+            min_sleep = simpledialog.askfloat("Set Mouse Sleep Time", "Enter minimum sleep time (seconds):", initialvalue=self.min_sleep)
+            max_sleep = simpledialog.askfloat("Set Mouse Sleep Time", "Enter maximum sleep time (seconds):", initialvalue=self.max_sleep)
 
             if min_sleep is not None and max_sleep is not None:
                 if min_sleep > max_sleep:
                     raise ValueError("Min sleep time should not be greater than max sleep time.")
                 self.min_sleep = min_sleep
                 self.max_sleep = max_sleep
-                print(f"Sleep time range set to {self.min_sleep} to {self.max_sleep} seconds.")
+                print(f"Mouse sleep time range set to {self.min_sleep} to {self.max_sleep} seconds.")
             else:
-                print("Sleep time setting was canceled.")
+                print("Mouse sleep time setting was canceled.")
+
+        except ValueError as e:
+            messagebox.showerror("Invalid Input", f"Invalid input: {e}")
+
+    def set_keyboard_sleep_time(self):
+        try:
+            min_sleep = simpledialog.askfloat("Set Keyboard Sleep Time", "Enter minimum keyboard sleep time (seconds):", initialvalue=self.min_keyboard_sleep)
+            max_sleep = simpledialog.askfloat("Set Keyboard Sleep Time", "Enter maximum keyboard sleep time (seconds):", initialvalue=self.max_keyboard_sleep)
+
+            if min_sleep is not None and max_sleep is not None:
+                if min_sleep > max_sleep:
+                    raise ValueError("Min sleep time should not be greater than max sleep time.")
+                self.min_keyboard_sleep = min_sleep
+                self.max_keyboard_sleep = max_sleep
+                print(f"Keyboard sleep time range set to {self.min_keyboard_sleep} to {self.max_keyboard_sleep} seconds.")
+            else:
+                print("Keyboard sleep time setting was canceled.")
 
         except ValueError as e:
             messagebox.showerror("Invalid Input", f"Invalid input: {e}")
@@ -110,11 +134,12 @@ class MouseRecorder:
     def save_clicks(self):
         with open('recorded_data.txt', 'w') as file:
             for x, y in self.click_positions:
-                sleep_time = randint(self.min_sleep, self.max_sleep)
-                file.write(f"sleep({sleep_time})\n")
+                sleep_time = uniform(self.min_sleep, self.max_sleep)
+                file.write(f"sleep({sleep_time:.2f})\n")
                 file.write(f"click(x={x}, y={y})\n")
             for record in self.keyboard_records:
-                file.write(f"sleep({randint(self.min_sleep, self.max_sleep)})\n")
+                sleep_time = uniform(self.min_keyboard_sleep, self.max_keyboard_sleep)
+                file.write(f"sleep({sleep_time:.2f})\n")
                 file.write(f"{record}\n")
         print("Data recorded and saved to 'recorded_data.txt'.")
         self.label_status.config(text="Status: Data Saved")
