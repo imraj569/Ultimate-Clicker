@@ -1,4 +1,3 @@
-
 ---
 
 # Ultimate-Clicker 🎯
@@ -7,21 +6,21 @@ Ultimate-Clicker is a powerful Python-based tool designed to automate mouse and 
 
 ## 📁 Scripts
 
-1. **[record_clicks.py](record_clicks.py)** 🖱️
+1. **[record_clicks.pyw](record_clicks.pyw)** 🖱️
    - **Purpose:** Records mouse clicks and keyboard events, and saves them to a file.
    - **Features:**
      - Record mouse clicks and keyboard events with configurable sleep times.
      - Save recorded data to a file for later use.
      - Reset and configure settings using an intuitive GUI.
 
-2. **[auto_clicker.py](auto_clicker.py)** ⏯️
+2. **[auto_clicker.pyw](auto_clicker.pyw)** ⏯️
    - **Purpose:** Executes the recorded clicks and keystrokes from a file.
    - **Features:**
      - Play, pause, and reset execution.
      - Set the number of repetitions for the click and keystroke actions.
      - View real-time status updates and remaining repetitions.
 
-3. **[manual_clicks.py](manual_clicks.py)** 📝
+3. **[manual_clicks.pyw](manual_clicks.pyw)** 📝
    - **Purpose:** Provides a basic template for manual clicks and keyboard actions.
    - **Features:**
      - Play and reset script actions using a simple GUI.
@@ -44,15 +43,15 @@ Ultimate-Clicker is a powerful Python-based tool designed to automate mouse and 
 ### Usage
 
 1. **Recording Clicks:**
-   - Run `record_clicks.py` to open the recording interface.
+   - Run `record_clicks.pyw` to open the recording interface.
    - Configure settings, record clicks and keystrokes, and save them to a file.
 
 2. **Executing Clicks:**
-   - Run `auto_clicker.py` to start executing recorded actions.
+   - Run `auto_clicker.pyw` to start executing recorded actions.
    - Use the GUI to play, pause, and reset the execution.
 
 3. **Manual Actions:**
-   - Run `manual_clicks.py` to test basic script actions.
+   - Run `manual_clicks.pyw` to test basic script actions.
    - Use hotkeys or the GUI to control the script.
 
 ## 💡 Features
